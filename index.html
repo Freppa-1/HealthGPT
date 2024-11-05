@@ -1,12 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthGPT</title>
-    <link rel="stylesheet" href="stylesheet.css">
-</head>
-<body>
-    
-</body>
+<html>
+    <head>
+        <title>HealthGPT</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>HealthGPT</h1>
+            <div id="chat">
+                <input type="text" id="message-input" placeholder="Type a message">
+                <button id="send-button">Send</button>
+            </div>
+            <script>
+                const sendButton = document.getElementById('send-button');
+const messageInput = document.getElementById('message-input');
+
+sendButton.addEventListener('click', async () => {
+    const message = messageInput.value;
+
+    const response = await fetch('http://localhost:5000/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+    console.log(data);
+});
+            </script>
+        </div>
+    </body>
 </html>
